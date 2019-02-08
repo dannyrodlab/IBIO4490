@@ -219,9 +219,11 @@ vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type
  
 5. What are all the different resolutions? What is their format? Tip: use ``awk``, ``sort``, ``uniq`` 
 
-vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '{}' \; |  sort -u
-321 481 
+```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '{}' \; |  sort -u \n
+321 481 \n 
 481 321 
+```
 
 6. How many of them are in *landscape* orientation (opposed to *portrait*)? Tip: use ``awk`` and ``cut``
 
