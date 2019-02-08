@@ -175,9 +175,68 @@ See [here](ssh.md) for different types of SSH connection with respect to your OS
 ## Your turn
 
 1. What is the ``grep``command?
+The ``grep`` command stands for "Global Representation E Processor". It is one of the most used commands in Unix. It allows to search files line by line and returns the lines which match a specific pattern. In the following example you see how grep display the number of the lines where it found the line and the characters highlighted.
+```console
+vision@bcv002:~/dannyrodlab/IBIO4490$ grep -n --color "hermanos" 01-Linux/milonga.txt
+15:Ni cuales son mis hermanos
+31:Ni cuales son mis hermanos
+```
+2. What is the meaning of ``#!/bin/python`` at the start of scripts?
+The first line on a script indicates what interpreter should execute it. It is commonly referred as the ``shebang``. The syntax is the following:
+``#!`` must be at the beginning simply indicating that the script is an executable that hast to be run.\
+``/bin/python`` is the path to the interpreter.
+``/bin`` is a standard subdirectory of the root directory that contains the executable programs that must be available in order to attain minimal functionality for the purposes of booting.
 
-The ``grep`` command stands for "Global Representation E Processor". It is one of the most used commands in Unix. It allows to search files line by line and returns the lines which match a specific pattern. In the following example you see how grep display the number of the lines where it found the line and the characters highlighted. 
+In this example I run the script ``hello_world.py``.
+```console
+vision@bcv002:~/dannyrodlab$ vi hello_world.py
+vision@bcv002:~/dannyrodlab$ chmod u+x hello_world.py
+vision@bcv002:~/dannyrodlab$ python hello_world.py
+Hello World
+```
+If we inspect the code hello_world.py it looks like:
+```python
+#!/bin/python
 
+print 'Hello World'
+```
+3. Download using ``wget`` the [*bsds500*](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html#bsds500) image segmentation database, and decompress it using ``tar`` (keep it in you hard drive, we will come back over this data in a few weeks).
+```console                                                                           
+wget http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz           
+tar -zxvf BSR_bsds500.tgz                                                                            
+```             
+5. What is the disk size of the uncompressed dataset, How many images are in the directory 'BSR/BSDS500/data/images'?
+```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500$ du -hs data
+60M	data    
+``` 
+ ```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%i \n' '{}' 
+\; |  wc -l                                                                                          
+500
+```
+6. What are all the different resolutions? What is their format? Tip: use ``awk``, ``sort``, ``uniq``                                                                                              
+```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '{
+}' \; |  sort -u
+321 481                                                                             
+481 321                                                                                              
+```
+7. How many of them are in *landscape* orientation (opposed to *portrait*)? Tip: use ``awk`` and ``cut``
+### Landscape
+```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '
+{}' \; |  grep "321 481" | wc -l
+152
+```
+### Portrait 
+```console
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '{}' \; |  grep "481 321" | wc -l
+348                                                                                           
+```                                                                                               
+8. Crop all images to make them square (256x256) and save them in a different folder. Tip: do not forget about  [imagem
+agick](http://www.imagemagick.org/script/index.php).
+ 
 vision@bcv002:~/dannyrodlab/IBIO4490$ grep -n --color "hermanos" 01-Linux/milonga.txt 
 15:Ni cuales son mis hermanos
 31:Ni cuales son mis hermanos
