@@ -205,13 +205,26 @@ print 'Hello World'
 
 3. Download using ``wget`` the [*bsds500*](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html#bsds500) image segmentation database, and decompress it using ``tar`` (keep it in you hard drive, we will come back over this data in a few weeks).
 
+wget http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz
+tar -zxvf BSR_bsds500.tgz
 
- 
+vision@bcv002:~/dannyrodlab/BSR/BSDS500$ du -hs data
+vision@bcv002:~/dannyrodlab/BSR/BSDS500$ ls -R data/images | wc -l
+
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%i \n' '{}' \; |  wc -l
+500
+
+	 
 4. What is the disk size of the uncompressed dataset, How many images are in the directory 'BSR/BSDS500/data/images'?
  
 5. What are all the different resolutions? What is their format? Tip: use ``awk``, ``sort``, ``uniq`` 
 
+vision@bcv002:~/dannyrodlab/BSR/BSDS500/data/images$ find . -iname "*.jpg" -type f -exec identify -format '%w %h \n' '{}' \; |  sort -u
+321 481 
+481 321 
+
 6. How many of them are in *landscape* orientation (opposed to *portrait*)? Tip: use ``awk`` and ``cut``
+
  
 7. Crop all images to make them square (256x256) and save them in a different folder. Tip: do not forget about  [imagemagick](http://www.imagemagick.org/script/index.php).
 
