@@ -32,7 +32,7 @@ else:
     break
 
 # Random number of images between 6 and 24
-number_images = irandom.randint(6,24)
+number_images = np.random.randint(6,24)
 
 # Holder of all images
 image_holder = []
