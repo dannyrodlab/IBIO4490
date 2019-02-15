@@ -12,7 +12,7 @@ start_time = time.time()
 
 ## Let us put things in order ##
 folder = '/media/disk1/vision/dannyrodlab/'
-os.chdir(path)
+os.chdir(folder)
 
 link_database = "http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz"
 name_file = "BSR_bsds500.tgz"
